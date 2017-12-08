@@ -1,0 +1,28 @@
+{
+    "Year": 2018,
+    "Name": "春节",
+    "Holidays": [
+        {
+            "Month": 2,
+            "Start": 15,
+            "Length": 7
+        }
+    ],
+    "LegalHolidays": [
+        {
+            "Month": 2,
+            "Start": 16,
+            "Length": 3
+        }
+    ],
+    "WorkDays": [
+        {
+            "Month": 2,
+            "Day": 11
+        },
+        {
+            "Month": 2,
+            "Day": 24
+        }
+    ]
+}
