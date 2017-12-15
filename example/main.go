@@ -13,7 +13,7 @@ import (
 	"strings"
 	"sync"
 
-	"holiday"
+	"github.com/qingtao/holiday"
 )
 
 type WhiteList struct {
@@ -30,6 +30,21 @@ type Server struct {
 	exit      chan struct{}
 }
 
+//检查ip权限
+func (wl *WhiteList) Verify(ip net.IP) bool {
+	for _, ipnet := range wl.IPNets {
+		if ipnet.Contains(ip) {
+			return true
+		}
+	}
+	for _, ip1 := range wl.IPs {
+		if ip1.Equal(ip) {
+			return true
+		}
+	}
+	return false
+}
+
 func (wl *WhiteList) Update(action, s string) error {
 	wl.Lock.Lock()
 	defer wl.Lock.Unlock()
@@ -42,7 +57,7 @@ func (wl *WhiteList) Update(action, s string) error {
 		if err != nil {
 			allowIP := net.ParseIP(line)
 			if allowIP == nil {
-				return fmt.Errorf("contain not a valid ip address: %s\n", err)
+				return fmt.Errorf("not a valid ip address: %s\n", err)
 			}
 			ips[line] = allowIP
 			continue
@@ -52,18 +67,33 @@ func (wl *WhiteList) Update(action, s string) error {
 
 	switch action {
 	case "ADD", "UPDATE":
-		for k, v := range ips {
-			wl.IPs[k] = v
-		}
+	TOPL:
 		for k, v := range ipnets {
+			for wk, wv := range wl.IPNets {
+				if wv.Contains(v.IP) || v.Contains(wv.IP) {
+					wOnes, _ := wv.Mask.Size()
+					ones, _ := v.Mask.Size()
+					if ones < wOnes {
+						delete(wl.IPNets, wk)
+						wl.IPNets[k] = v
+					}
+					continue TOPL
+				}
+			}
 			wl.IPNets[k] = v
 		}
-	case "DEL":
-		for k, _ := range ips {
-			delete(wl.IPs, k)
+		for k, v := range ips {
+			if wl.Verify(v) {
+				continue
+			}
+			wl.IPs[k] = v
 		}
+	case "DEL":
 		for k, _ := range ipnets {
 			delete(wl.IPNets, k)
+		}
+		for k, _ := range ips {
+			delete(wl.IPs, k)
 		}
 	}
 	return nil
@@ -93,28 +123,12 @@ func NewServer(whitelist string, l *log.Logger) (*Server, error) {
 	return srv, nil
 }
 
-//检查ip权限
-func (srv *Server) Verify(ip net.IP) bool {
-	for _, ipnet := range srv.WhiteList.IPNets {
-		if ipnet.Contains(ip) {
-			return true
-		}
-	}
-	//for j := 0; j < len(srv.wl.IPs); j++ {
-	for _, ip1 := range srv.WhiteList.IPs {
-		if ip1.Equal(ip) {
-			return true
-		}
-	}
-	return false
-}
-
 //实现ServeHTTP: 并检查IP地址是否允许访问
 func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var ip string
 	if xforwarfor := r.Header.Get("X-Forward-For"); xforwarfor != "" {
 		ip = xforwarfor
-		if srv.Verify(net.ParseIP(xforwarfor)) {
+		if srv.WhiteList.Verify(net.ParseIP(xforwarfor)) {
 			srv.ServeMux.ServeHTTP(w, r)
 		}
 		return
@@ -127,7 +141,7 @@ func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ip = userip
-	if srv.Verify(net.ParseIP(ip)) {
+	if srv.WhiteList.Verify(net.ParseIP(ip)) {
 		srv.ServeMux.ServeHTTP(w, r)
 		return
 	}
@@ -217,6 +231,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	fmt.Printf("%+v\n", s.WhiteList)
 	hs := map[int]*holiday.HolidaysOfYear{
 		2018: holiday.NewHolidaysOfYear(2018, 0, 6),
 	}
