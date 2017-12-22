@@ -1,0 +1,11 @@
+{
+    "Year": 2018,
+    "Name": "端午节",
+    "LegalHolidays": [
+        {
+            "Month": 6,
+            "Start": 18,
+            "Length": 1
+        }
+    ]
+}
