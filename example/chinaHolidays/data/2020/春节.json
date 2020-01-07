@@ -1,0 +1,28 @@
+{
+    "Year": 2020,
+    "Name": "春节",
+    "Holidays": [
+        {
+            "Month": 1,
+            "Start": 24,
+            "Length": 7
+        }
+    ],
+    "LegalHolidays": [
+        {
+            "Month": 1,
+            "Start": 24,
+            "Length": 3
+        }
+    ],
+    "WorkDays": [
+        {
+            "Month": 1,
+            "Day": 19
+        },
+        {
+            "Month": 2,
+            "Day": 1
+        }
+    ]
+}

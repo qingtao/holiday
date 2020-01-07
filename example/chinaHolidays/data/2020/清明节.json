@@ -1,0 +1,19 @@
+{
+    "Year": 2020,
+    "Name": "清明节",
+    "Holidays": [
+        {
+            "Month": 4,
+            "Start": 4,
+            "Length": 3
+        }
+    ],
+    "LegalHolidays": [
+        {
+            "Month": 4,
+            "Start": 4,
+            "Length": 1
+        }
+    ],
+    "WorkDays": []
+}

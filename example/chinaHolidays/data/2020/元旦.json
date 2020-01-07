@@ -1,0 +1,11 @@
+{
+    "Year": 2020,
+    "Name": "元旦",
+    "LegalHolidays": [
+        {
+            "Month": 1,
+            "Start": 1,
+            "Length": 1
+        }
+    ]
+}

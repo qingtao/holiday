@@ -1,0 +1,28 @@
+{
+    "Year": 2020,
+    "Name": "国庆节",
+    "Holidays": [
+        {
+            "Month": 10,
+            "Start": 1,
+            "Length": 8
+        }
+    ],
+    "LegalHolidays": [
+        {
+            "Month": 10,
+            "Start": 1,
+            "Length": 1
+        }
+    ],
+    "WorkDays": [
+        {
+            "Month": 9,
+            "Day": 27
+        },
+        {
+            "Month": 10,
+            "Day": 10
+        }
+    ]
+}

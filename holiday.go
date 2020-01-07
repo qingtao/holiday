@@ -79,24 +79,27 @@ func (hy *HolidaysOfYear) Update(ch *ChineseHoliday) error {
 	if hy.Year != ch.Year {
 		return fmt.Errorf("the year is not matched")
 	}
+	if hy.Month == nil {
+		hy.Month = make(map[int]HolidaysOfMonth)
+	}
 	for _, v := range ch.Holidays {
 		start := time.Date(hy.Year, time.Month(v.Month), v.Start, 0, 0, 0, 0, time.Now().Location())
 		for i := 0; i < v.Len; i++ {
 			d := start.AddDate(0, 0, i)
-			month, ok := hy.Month[int(d.Month())]
-			if ok {
-				month[d.Day()] = holiday
+			if _, ok := hy.Month[int(d.Month())]; !ok {
+				hy.Month[int(d.Month())] = make(map[int]int)
 			}
+			hy.Month[int(d.Month())][d.Day()] = holiday
 		}
 	}
 	for _, v := range ch.LegalHolidays {
 		start := time.Date(hy.Year, time.Month(v.Month), v.Start, 0, 0, 0, 0, time.Now().Location())
 		for i := 0; i < v.Len; i++ {
 			d := start.AddDate(0, 0, i)
-			month, ok := hy.Month[int(d.Month())]
-			if ok {
-				month[d.Day()] = legalHoliday
+			if _, ok := hy.Month[int(d.Month())]; !ok {
+				hy.Month[int(d.Month())] = make(map[int]int)
 			}
+			hy.Month[int(d.Month())][d.Day()] = legalHoliday
 		}
 	}
 
