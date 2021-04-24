@@ -90,7 +90,7 @@ func (wl *WhiteList) Update(action, s string) error {
 						delete(wl.IPNets, wk)
 						wl.IPNets[k] = v
 					}
-					//跳到第一个循环开始
+					// 跳到第一个循环开始
 					continue TOPL
 				}
 			}
@@ -122,7 +122,7 @@ func NewServer(whitelist string, l *log.Logger) (*Server, error) {
 		return nil, err
 	}
 
-	var s = new(Server)
+	s := new(Server)
 	s.ServeMux = mux
 
 	wl := &WhiteList{
@@ -168,7 +168,7 @@ func (s *Server) VerifyClient(w http.ResponseWriter, r *http.Request) bool {
 			http.Error(w, err.Error(), http.StatusServiceUnavailable)
 			return false
 		}
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "%s", msg)
 		return false
@@ -207,7 +207,7 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 			w.WriteHeader(http.StatusServiceUnavailable)
 			return
 		}
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "%s", msg)
 		return
@@ -220,7 +220,7 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 			w.WriteHeader(http.StatusServiceUnavailable)
 			return
 		}
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "%s", msg)
 		return
@@ -233,7 +233,7 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 			w.WriteHeader(http.StatusServiceUnavailable)
 			return
 		}
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(http.StatusBadRequest)
 		fmt.Fprintf(w, "%s", msg)
 		return
@@ -262,7 +262,7 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 				w.WriteHeader(http.StatusServiceUnavailable)
 				return
 			}
-			w.Header().Set("Content-Type", "text/json; charset=utf-8")
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
 			w.WriteHeader(http.StatusBadRequest)
 			fmt.Fprintf(w, "%s", msg)
 			return
@@ -273,12 +273,12 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 		w.WriteHeader(http.StatusServiceUnavailable)
 		return
 	}
-	w.Header().Set("Content-Type", "text/json; charset=utf-8")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Fprintf(w, "%s", msg)
 }
 
 // ServeMain 监听服务
 func ServeMain(w http.ResponseWriter, r *http.Request, s string) {
-	w.Header().Set("Content-Type", "text/json; charset=utf-8")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Fprint(w, s)
 }

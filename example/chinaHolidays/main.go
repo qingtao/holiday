@@ -28,7 +28,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	s.HandleFunc("/hs", func(w http.ResponseWriter, r *http.Request) {
+	s.HandleFunc("/holidays", func(w http.ResponseWriter, r *http.Request) {
 		if !s.VerifyClient(w, r) {
 			return
 		}
@@ -37,6 +37,6 @@ func main() {
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		ServeMain(w, r, "hello!")
 	})
-	addr := ":10082"
+	addr := "127.0.0.1:8080"
 	http.ListenAndServe(addr, s)
 }

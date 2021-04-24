@@ -10,9 +10,12 @@ import (
 )
 
 // load 加载数据
-func load(dir string, h1, h2 int) (hs map[int]*holiday.HolidaysOfYear, err error) {
-	hs = make(map[int]*holiday.HolidaysOfYear)
-	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+func load(dir string, h1, h2 int) (map[int]*holiday.HolidaysOfYear, error) {
+	hs := make(map[int]*holiday.HolidaysOfYear)
+	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
 		if info.IsDir() {
 			return nil
 		}
@@ -30,5 +33,5 @@ func load(dir string, h1, h2 int) (hs map[int]*holiday.HolidaysOfYear, err error
 		hs[chd.Year].Update(&chd)
 		return nil
 	})
-	return
+	return hs, err
 }

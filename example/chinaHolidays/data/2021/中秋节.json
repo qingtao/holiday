@@ -1,0 +1,24 @@
+{
+  "Year": 2021,
+  "Name": "中秋节",
+  "Holidays": [
+    {
+      "Month": 9,
+      "Start": 19,
+      "Length": 3
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 9,
+      "Start": 21,
+      "Length": 1
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 9,
+      "Day": 18
+    }
+  ]
+}

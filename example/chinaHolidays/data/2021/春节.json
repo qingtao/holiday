@@ -1,0 +1,28 @@
+{
+  "Year": 2021,
+  "Name": "春节",
+  "Holidays": [
+    {
+      "Month": 2,
+      "Start": 11,
+      "Length": 7
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 2,
+      "Start": 11,
+      "Length": 3
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 2,
+      "Day": 7
+    },
+    {
+      "Month": 2,
+      "Day": 20
+    }
+  ]
+}
