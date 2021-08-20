@@ -13,6 +13,7 @@ var (
 	whitelist = flag.String("whitelist", "./whitelist.cnf", "白名单文件")
 	h1        = flag.Int("weekend1", 0, "每周休息日的第一天,默认0(周日)")
 	h2        = flag.Int("weekend2", 6, "每周休息日的第二天,默认6(周六)")
+	addr      = flag.String("addr", "127.0.0.1:8080", "监听地址端口")
 )
 
 func main() {
@@ -37,6 +38,6 @@ func main() {
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		ServeMain(w, r, "hello!")
 	})
-	addr := "127.0.0.1:8080"
-	http.ListenAndServe(addr, s)
+	log.Printf("listen on: %s\n", *addr)
+	log.Fatalln(http.ListenAndServe(*addr, s))
 }
