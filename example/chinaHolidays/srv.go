@@ -16,7 +16,7 @@ import (
 
 // WhiteList 用于设置http服务器的IP地址白名单
 type WhiteList struct {
-	Lock   sync.Mutex
+	sync.RWMutex
 	IPs    map[string]net.IP
 	IPNets map[string]*net.IPNet
 }
@@ -37,7 +37,7 @@ type Message struct {
 }
 
 // Verify 检查ip权限
-func (wl *WhiteList) Verify(ip net.IP) bool {
+func (wl *WhiteList) verify(ip net.IP) bool {
 	for _, ipnet := range wl.IPNets {
 		if ipnet.Contains(ip) {
 			return true
@@ -51,10 +51,16 @@ func (wl *WhiteList) Verify(ip net.IP) bool {
 	return false
 }
 
+func (wl *WhiteList) Verify(ip net.IP) bool {
+	wl.RLock()
+	defer wl.RUnlock()
+	return wl.verify(ip)
+}
+
 // Update 更新白名单，action可以是ADD/UPDATE和DEL
 func (wl *WhiteList) Update(action, s string) error {
-	wl.Lock.Lock()
-	defer wl.Lock.Unlock()
+	wl.Lock()
+	defer wl.Unlock()
 	ips, ipnets := make(map[string]net.IP), make(map[string]*net.IPNet)
 	// 查找白名单的每一行，并忽略#号开头的注释内容
 	for _, line := range strings.Fields(s) {
@@ -98,7 +104,7 @@ func (wl *WhiteList) Update(action, s string) error {
 		}
 		// 逐条添加ip地址到白名单
 		for k, v := range ips {
-			if wl.Verify(v) {
+			if wl.verify(v) {
 				continue
 			}
 			wl.IPs[k] = v
