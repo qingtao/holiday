@@ -1,0 +1,19 @@
+{
+  "Year": 2022,
+  "Name": "中秋节",
+  "Holidays": [
+    {
+      "Month": 9,
+      "Start": 10,
+      "Length": 3
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 9,
+      "Start": 10,
+      "Length": 1
+    }
+  ],
+  "WorkDays": []
+}

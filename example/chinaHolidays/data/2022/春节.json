@@ -1,0 +1,28 @@
+{
+  "Year": 2022,
+  "Name": "春节",
+  "Holidays": [
+    {
+      "Month": 1,
+      "Start": 31,
+      "Length": 7
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 1,
+      "Start": 31,
+      "Length": 3
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 1,
+      "Day": 29
+    },
+    {
+      "Month": 1,
+      "Day": 30
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Year": 2022,
+  "Name": "清明节",
+  "Holidays": [
+    {
+      "Month": 4,
+      "Start": 3,
+      "Length": 3
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 4,
+      "Start": 5,
+      "Length": 1
+    }
+  ],
+  "WorkDays": [
+     {
+      "Month": 4,
+      "Day": 2
+    }
+  ]
+}
