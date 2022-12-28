@@ -16,6 +16,8 @@ var (
 	addr      = flag.String("addr", "127.0.0.1:8080", "监听地址端口")
 )
 
+const doc = `use /holidays?year=2023 or /holidays?year=2023&month=1`
+
 func main() {
 	flag.Parse()
 	l := log.New(os.Stdout, "", 1|2)
@@ -36,7 +38,7 @@ func main() {
 		ServeHolidays(w, r, hs)
 	})
 	s.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		ServeMain(w, r, "hello!")
+		ServeMain(w, r, doc)
 	})
 	log.Printf("listen on: %s\n", *addr)
 	log.Fatalln(http.ListenAndServe(*addr, s))

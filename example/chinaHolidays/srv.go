@@ -286,5 +286,6 @@ func ServeHolidays(w http.ResponseWriter, r *http.Request, h map[int]*holiday.Ho
 // ServeMain 监听服务
 func ServeMain(w http.ResponseWriter, r *http.Request, s string) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	fmt.Fprint(w, s)
+	msg, _ := genMessage("error", s)
+	fmt.Fprintf(w, "%s", msg)
 }
