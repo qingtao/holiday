@@ -1,0 +1,28 @@
+{
+  "Year": 2022,
+  "Name": "劳动节",
+  "Holidays": [
+    {
+      "Month": 4,
+      "Start": 29,
+      "Length": 5
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 5,
+      "Start": 1,
+      "Length": 1
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 4,
+      "Day": 23
+    },
+    {
+      "Month": 5,
+      "Day": 6
+    }
+  ]
+}

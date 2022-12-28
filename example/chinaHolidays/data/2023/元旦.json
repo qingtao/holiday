@@ -1,0 +1,18 @@
+{
+  "Year": 2023,
+  "Name": "元旦",
+  "Holidays": [
+    {
+      "Month": 1,
+      "Start": 1,
+      "Length": 2
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 1,
+      "Start": 1,
+      "Length": 1
+    }
+  ]
+}

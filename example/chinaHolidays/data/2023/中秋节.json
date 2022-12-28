@@ -1,0 +1,19 @@
+{
+  "Year": 2023,
+  "Name": "中秋节",
+  "Holidays": [
+    {
+      "Month": 9,
+      "Start": 29,
+      "Length": 2
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 9,
+      "Start": 29,
+      "Length": 1
+    }
+  ],
+  "WorkDays": []
+}

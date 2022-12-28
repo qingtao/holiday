@@ -1,0 +1,13 @@
+{
+  "Year": 2022,
+  "Name": "2022元旦",
+  "Holidays": [
+    {
+      "Month": 12,
+      "Start": 31,
+      "Length": 1
+    }
+  ],
+  "LegalHolidays": [],
+  "WorkDays": [{}]
+}

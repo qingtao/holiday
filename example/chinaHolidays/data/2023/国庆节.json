@@ -1,0 +1,28 @@
+{
+  "Year": 2023,
+  "Name": "国庆节",
+  "Holidays": [
+    {
+      "Month": 10,
+      "Start": 1,
+      "Length": 6
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 10,
+      "Start": 1,
+      "Length": 3
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 10,
+      "Day": 7
+    },
+    {
+      "Month": 10,
+      "Day": 8
+    }
+  ]
+}

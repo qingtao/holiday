@@ -1,0 +1,24 @@
+{
+  "Year": 2023,
+  "Name": "端午节",
+  "Holidays": [
+    {
+      "Month": 6,
+      "Start": 22,
+      "Length": 3
+    }
+  ],
+  "LegalHolidays": [
+    {
+      "Month": 6,
+      "Start": 22,
+      "Length": 1
+    }
+  ],
+  "WorkDays": [
+    {
+      "Month": 6,
+      "Day": 25
+    }
+  ]
+}
